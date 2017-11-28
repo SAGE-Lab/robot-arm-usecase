@@ -1,0 +1,117 @@
+
+################################################################
+#
+# joint angle measures are expressed in degrees
+# joint speed measures are expressed in degrees/s
+# joint acceleration measures are expressed in degrees/s^2
+# joint torque measures are expressed in N*m
+# ef_size is expressed in cm
+# ef_force is expressed in N
+#
+################################################################
+
+################################################################
+#
+# Fault injection 5
+# A requirement states that after state_init, state_releasing happens
+# before state_grabbing
+#
+################################################################
+After state_init until state_grabbing, state_releasing eventually holds.
+
+                                        
+# Global Requirements
+Globally, it is never the case that joint1_angle < -170 or joint1_angle > 170 holds.
+Globally, it is never the case that joint2_angle < -130 or joint2_angle > 130 holds.
+Globally, it is never the case that joint3_angle < -130 or joint3_angle > 130 holds.
+Globally, it is never the case that joint4_angle < -90 or joint4_angle > 90 holds.
+Globally, it is never the case that joint1_speed > 90 holds.
+Globally, it is never the case that joint2_speed > 90 holds.
+Globally, it is never the case that joint3_speed > 90 holds.
+Globally, it is never the case that joint4_speed > 90 holds.
+Globally, it is never the case that joint1_acc > 10 holds.
+Globally, it is never the case that joint2_acc > 10 holds.
+Globally, it is never the case that joint3_acc > 10 holds.
+Globally, it is never the case that joint4_acc > 10 holds.
+Globally, it is never the case that ef_force > 2.5 holds. 
+Globally, it is always the case that if joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds, then arm_idle holds as well. 
+Globally, it is always the case that if ef_speed = 0 and ef_acc = 0 holds, then ef_idle holds as well.
+
+
+# Express states evolution
+After state_init, state_scanning eventually holds.
+After state_scanning, state_moving_to_target or state_alarm eventually holds.
+After state_moving_to_target, state_target_reached or state_alarm eventually holds.
+After state_target_reached, state_grabbing or state_alarm eventually holds.
+After state_grabbing, state_moving_to_bucket or state_alarm eventually holds.
+After state_moving_to_bucket, state_bucket_reached or state_alarm eventually holds.
+After state_bucket_reached, state_releasing or state_alarm eventually holds.
+After state_releasing, state_init eventually holds.
+
+After state_init until state_scanning, it is never the case that state_moving_to_target holds.
+After state_init until state_moving_to_target, it is never the case that state_target_reached holds.
+After state_init until state_target_reached, it is never the case that state_grabbing holds.
+After state_init until state_grabbing, it is never the case that state_moving_to_bucket holds.
+After state_init until state_moving_to_bucket, it is never the case that state_bucket_reached holds.
+After state_init until state_bucket_reached, it is never the case that state_releasing holds.
+
+After state_scanning until state_releasing or state_alarm, it is never the case that state_init holds.
+After state_moving_to_target until state_init, it is never the case that state_scanning holds.
+After state_target_reached until state_init, it is never the case that state_moving_to_target holds.
+After state_grabbing until state_init, it is never the case that state_target_reached holds.
+After state_moving_to_bucket until state_init, it is never the case that state_grabbing holds.
+After state_bucket_reached until state_init, it is never the case that state_moving_to_bucket holds.
+
+
+# Mutually exclusive states
+Globally, it is always the case that if state_init holds, then not (state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.
+Globally, it is always the case that if state_scanning holds, then not (state_init or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.
+Globally, it is always the case that if state_moving_to_target holds, then not (state_init or state_scanning or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.
+Globally, it is always the case that if state_target_reached holds, then not (state_init or state_scanning or state_moving_to_target or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.
+Globally, it is always the case that if state_grabbing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.
+Globally, it is always the case that if state_grabbing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.
+Globally, it is always the case that if state_moving_to_bucket holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_bucket_reached or state_releasing or state_alarm) holds as well.
+Globally, it is always the case that if state_bucket_reached holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_releasing or state_alarm) holds as well.
+Globally, it is always the case that if state_releasing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_alarm) holds as well.
+Globally, it is always the case that if state_alarm holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing) holds as well.
+
+Globally, it is always the case that (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds.
+
+# Init state requirements
+Globally, it is always the case that if state_init holds, then arm_idle and ef_idle and joint1_angle = 0 and joint2_angle = 0 and joint3_angle = 0 and joint4_angle = 0 and ef_size = 1.8 holds as well.
+Globally, it is always the case that if (state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds, then state_init previously held.
+
+# Scanning state requirements
+Globally, it is always the case that if state_scanning holds, then arm_idle and ef_idle holds as well.
+After state_scanning, it is always the case that object_detected holds.
+After state_scanning, it is always the case that if object_detected holds, then state_moving_to_target eventually holds.
+
+# Moving to target state requirements
+Globally, it is always the case that if state_moving_to_target holds, then joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 eventually holds.
+Globally, it is always the case that if state_moving_to_target holds, then ef_size = 1.8 and ef_idle holds as well.
+
+# Target reached state requirements
+Globally, it is always the case that if state_target_reached holds, then arm_idle and ef_idle holds as well.
+Globally, it is always the case that if state_target_reached holds, then ef_size = 1.8 holds as well.
+
+# Grabbing state requirements
+Globally, it is always the case that if state_grabbing holds, then arm_idle holds as well.
+After state_grabbing, it is always the case that ef_size < 1.8 and ef_speed > 0 holds.
+Globally, it is always the case that if state_grabbing holds, then ef_force >= 1 eventually holds and is succeeded by ef_speed = 0 and ef_acc = 0 .
+
+# Moving to bucket state requirements
+Globally, it is always the case that if state_moving_to_bucket holds, then joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 eventually holds.
+Globally, it is always the case that if state_moving_to_target holds, then ef_idle holds as well.
+
+# Bucket reached state requirements
+Globally, it is always the case that if state_bucket_reached holds, then arm_idle and ef_idle holds as well.
+
+# Releasing state requirements
+Globally, it is always the case that if state_releasing holds, then ef_force < 1 eventually holds and is succeeded by ef_size = 1.8 and ef_speed = 0 and ef_acc = 0 .
+
+# Alarm state requirements
+After alarm_button_pressed, state_alarm eventually holds.
+Globally, it is always the case that if state_alarm holds, then arm_idle and ef_idle holds as well.
+Globally, it is always the case that if joint1_torque > 10.0 or joint2_torque > 10.0 or  joint3_torque > 10.0 or  joint4_torque > 10.0 holds, then state_alarm eventually holds.
+
+
