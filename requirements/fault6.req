@@ -10,6 +10,16 @@
 #
 ################################################################
 
+################################################################
+#
+# Fault injection 5
+# A requirement states that a joint speed is always above a threshold
+# regardless of the proximity sensor
+#
+################################################################
+Globally, it is always the case that if arm_moving holds, then joint1_speed > 30.5 holds as well.
+Globally, arm_moving and proximity_sensor = 10.0 eventually holds.
+
 # Global Requirements
 Globally, it is never the case that joint1_angle < -170 or joint1_angle > 170 holds.
 Globally, it is never the case that joint2_angle < -130 or joint2_angle > 130 holds.
@@ -26,7 +36,7 @@ Globally, it is never the case that joint4_acc > 10 holds.
 Globally, it is never the case that ef_force > 2.5 holds.
 Globally, it is never the case that proximity_sensor < 0 holds.
 Globally, it is always the case that if arm_idle holds, then joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds as well.
-Globally, it is always the case that if joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds, then arm_idle holds as well.
+Globally, it is always the case that if joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds, then arm_idle holds as well. 
 Globally, it is always the case that if joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 holds, then arm_moving holds as well.
 Globally, it is always the case that if arm_moving holds, then joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 holds as well.
 Globally, it is always the case that if ef_idle holds, then ef_speed = 0 and ef_acc = 0 holds as well.

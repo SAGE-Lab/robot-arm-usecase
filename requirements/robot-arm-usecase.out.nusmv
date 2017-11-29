@@ -8,6 +8,7 @@ VAR
 	state_init : boolean;
 	state_alarm : boolean;
 	state_scanning : boolean;
+	arm_moving : boolean;
 	alarm_button_pressed : boolean;
 	state_moving_to_bucket : boolean;
 	state_grabbing : boolean;
@@ -20,10 +21,18 @@ VAR
 	_equal_joint3_acc0 : boolean; -- joint3_acc = 10.0
 	_lower_ef_acc0 : boolean; -- ef_acc < 0.0
 	_equal_ef_acc0 : boolean; -- ef_acc = 0.0
+	_lower_joint4_speed2 : boolean; -- joint4_speed < -20.0
+	_equal_joint4_speed2 : boolean; -- joint4_speed = -20.0
 	_lower_joint4_speed1 : boolean; -- joint4_speed < 0.0
 	_equal_joint4_speed1 : boolean; -- joint4_speed = 0.0
+	_lower_joint4_speed3 : boolean; -- joint4_speed < 20.0
+	_equal_joint4_speed3 : boolean; -- joint4_speed = 20.0
 	_lower_joint4_speed0 : boolean; -- joint4_speed < 90.0
 	_equal_joint4_speed0 : boolean; -- joint4_speed = 90.0
+	_lower_proximity_sensor0 : boolean; -- proximity_sensor < 0.0
+	_equal_proximity_sensor0 : boolean; -- proximity_sensor = 0.0
+	_lower_proximity_sensor1 : boolean; -- proximity_sensor < 20.0
+	_equal_proximity_sensor1 : boolean; -- proximity_sensor = 20.0
 	_lower_joint1_angle0 : boolean; -- joint1_angle < -170.0
 	_equal_joint1_angle0 : boolean; -- joint1_angle = -170.0
 	_lower_joint1_angle2 : boolean; -- joint1_angle < 0.0
@@ -54,14 +63,22 @@ VAR
 	_equal_joint3_angle2 : boolean; -- joint3_angle = 0.0
 	_lower_joint3_angle1 : boolean; -- joint3_angle < 130.0
 	_equal_joint3_angle1 : boolean; -- joint3_angle = 130.0
+	_lower_joint1_speed2 : boolean; -- joint1_speed < -20.0
+	_equal_joint1_speed2 : boolean; -- joint1_speed = -20.0
 	_lower_joint1_speed1 : boolean; -- joint1_speed < 0.0
 	_equal_joint1_speed1 : boolean; -- joint1_speed = 0.0
+	_lower_joint1_speed3 : boolean; -- joint1_speed < 20.0
+	_equal_joint1_speed3 : boolean; -- joint1_speed = 20.0
 	_lower_joint1_speed0 : boolean; -- joint1_speed < 90.0
 	_equal_joint1_speed0 : boolean; -- joint1_speed = 90.0
 	_lower_joint1_torque0 : boolean; -- joint1_torque < 10.0
 	_equal_joint1_torque0 : boolean; -- joint1_torque = 10.0
+	_lower_joint2_speed2 : boolean; -- joint2_speed < -20.0
+	_equal_joint2_speed2 : boolean; -- joint2_speed = -20.0
 	_lower_joint2_speed1 : boolean; -- joint2_speed < 0.0
 	_equal_joint2_speed1 : boolean; -- joint2_speed = 0.0
+	_lower_joint2_speed3 : boolean; -- joint2_speed < 20.0
+	_equal_joint2_speed3 : boolean; -- joint2_speed = 20.0
 	_lower_joint2_speed0 : boolean; -- joint2_speed < 90.0
 	_equal_joint2_speed0 : boolean; -- joint2_speed = 90.0
 	_lower_joint4_acc1 : boolean; -- joint4_acc < 0.0
@@ -82,8 +99,12 @@ VAR
 	_equal_joint2_angle2 : boolean; -- joint2_angle = 0.0
 	_lower_joint2_angle1 : boolean; -- joint2_angle < 130.0
 	_equal_joint2_angle1 : boolean; -- joint2_angle = 130.0
+	_lower_joint3_speed2 : boolean; -- joint3_speed < -20.0
+	_equal_joint3_speed2 : boolean; -- joint3_speed = -20.0
 	_lower_joint3_speed1 : boolean; -- joint3_speed < 0.0
 	_equal_joint3_speed1 : boolean; -- joint3_speed = 0.0
+	_lower_joint3_speed3 : boolean; -- joint3_speed < 20.0
+	_equal_joint3_speed3 : boolean; -- joint3_speed = 20.0
 	_lower_joint3_speed0 : boolean; -- joint3_speed < 90.0
 	_equal_joint3_speed0 : boolean; -- joint3_speed = 90.0
 	_lower_ef_speed0 : boolean; -- ef_speed < 0.0
@@ -96,12 +117,40 @@ INVAR (! _equal_joint3_acc1) | (! _lower_joint3_acc0);
 INVAR (! _equal_joint3_acc1) | (! _equal_joint3_acc0);
 INVAR (! _lower_joint3_acc0) | (! _equal_joint3_acc0);
 INVAR (! _lower_ef_acc0) | (! _equal_ef_acc0);
+INVAR (! _lower_joint4_speed2) | (! _equal_joint4_speed2);
+INVAR (! _lower_joint4_speed2) | (! _lower_joint4_speed1);
+INVAR (! _lower_joint4_speed2) | (! _equal_joint4_speed1);
+INVAR (! _lower_joint4_speed2) | (! _lower_joint4_speed3);
+INVAR (! _lower_joint4_speed2) | (! _equal_joint4_speed3);
+INVAR (! _lower_joint4_speed2) | (! _lower_joint4_speed0);
+INVAR (! _lower_joint4_speed2) | (! _equal_joint4_speed0);
+INVAR (! _equal_joint4_speed2) | (! _lower_joint4_speed1);
+INVAR (! _equal_joint4_speed2) | (! _equal_joint4_speed1);
+INVAR (! _equal_joint4_speed2) | (! _lower_joint4_speed3);
+INVAR (! _equal_joint4_speed2) | (! _equal_joint4_speed3);
+INVAR (! _equal_joint4_speed2) | (! _lower_joint4_speed0);
+INVAR (! _equal_joint4_speed2) | (! _equal_joint4_speed0);
 INVAR (! _lower_joint4_speed1) | (! _equal_joint4_speed1);
+INVAR (! _lower_joint4_speed1) | (! _lower_joint4_speed3);
+INVAR (! _lower_joint4_speed1) | (! _equal_joint4_speed3);
 INVAR (! _lower_joint4_speed1) | (! _lower_joint4_speed0);
 INVAR (! _lower_joint4_speed1) | (! _equal_joint4_speed0);
+INVAR (! _equal_joint4_speed1) | (! _lower_joint4_speed3);
+INVAR (! _equal_joint4_speed1) | (! _equal_joint4_speed3);
 INVAR (! _equal_joint4_speed1) | (! _lower_joint4_speed0);
 INVAR (! _equal_joint4_speed1) | (! _equal_joint4_speed0);
+INVAR (! _lower_joint4_speed3) | (! _equal_joint4_speed3);
+INVAR (! _lower_joint4_speed3) | (! _lower_joint4_speed0);
+INVAR (! _lower_joint4_speed3) | (! _equal_joint4_speed0);
+INVAR (! _equal_joint4_speed3) | (! _lower_joint4_speed0);
+INVAR (! _equal_joint4_speed3) | (! _equal_joint4_speed0);
 INVAR (! _lower_joint4_speed0) | (! _equal_joint4_speed0);
+INVAR (! _lower_proximity_sensor0) | (! _equal_proximity_sensor0);
+INVAR (! _lower_proximity_sensor0) | (! _lower_proximity_sensor1);
+INVAR (! _lower_proximity_sensor0) | (! _equal_proximity_sensor1);
+INVAR (! _equal_proximity_sensor0) | (! _lower_proximity_sensor1);
+INVAR (! _equal_proximity_sensor0) | (! _equal_proximity_sensor1);
+INVAR (! _lower_proximity_sensor1) | (! _equal_proximity_sensor1);
 INVAR (! _lower_joint1_angle0) | (! _equal_joint1_angle0);
 INVAR (! _lower_joint1_angle0) | (! _lower_joint1_angle2);
 INVAR (! _lower_joint1_angle0) | (! _equal_joint1_angle2);
@@ -161,18 +210,62 @@ INVAR (! _lower_joint3_angle2) | (! _equal_joint3_angle1);
 INVAR (! _equal_joint3_angle2) | (! _lower_joint3_angle1);
 INVAR (! _equal_joint3_angle2) | (! _equal_joint3_angle1);
 INVAR (! _lower_joint3_angle1) | (! _equal_joint3_angle1);
+INVAR (! _lower_joint1_speed2) | (! _equal_joint1_speed2);
+INVAR (! _lower_joint1_speed2) | (! _lower_joint1_speed1);
+INVAR (! _lower_joint1_speed2) | (! _equal_joint1_speed1);
+INVAR (! _lower_joint1_speed2) | (! _lower_joint1_speed3);
+INVAR (! _lower_joint1_speed2) | (! _equal_joint1_speed3);
+INVAR (! _lower_joint1_speed2) | (! _lower_joint1_speed0);
+INVAR (! _lower_joint1_speed2) | (! _equal_joint1_speed0);
+INVAR (! _equal_joint1_speed2) | (! _lower_joint1_speed1);
+INVAR (! _equal_joint1_speed2) | (! _equal_joint1_speed1);
+INVAR (! _equal_joint1_speed2) | (! _lower_joint1_speed3);
+INVAR (! _equal_joint1_speed2) | (! _equal_joint1_speed3);
+INVAR (! _equal_joint1_speed2) | (! _lower_joint1_speed0);
+INVAR (! _equal_joint1_speed2) | (! _equal_joint1_speed0);
 INVAR (! _lower_joint1_speed1) | (! _equal_joint1_speed1);
+INVAR (! _lower_joint1_speed1) | (! _lower_joint1_speed3);
+INVAR (! _lower_joint1_speed1) | (! _equal_joint1_speed3);
 INVAR (! _lower_joint1_speed1) | (! _lower_joint1_speed0);
 INVAR (! _lower_joint1_speed1) | (! _equal_joint1_speed0);
+INVAR (! _equal_joint1_speed1) | (! _lower_joint1_speed3);
+INVAR (! _equal_joint1_speed1) | (! _equal_joint1_speed3);
 INVAR (! _equal_joint1_speed1) | (! _lower_joint1_speed0);
 INVAR (! _equal_joint1_speed1) | (! _equal_joint1_speed0);
+INVAR (! _lower_joint1_speed3) | (! _equal_joint1_speed3);
+INVAR (! _lower_joint1_speed3) | (! _lower_joint1_speed0);
+INVAR (! _lower_joint1_speed3) | (! _equal_joint1_speed0);
+INVAR (! _equal_joint1_speed3) | (! _lower_joint1_speed0);
+INVAR (! _equal_joint1_speed3) | (! _equal_joint1_speed0);
 INVAR (! _lower_joint1_speed0) | (! _equal_joint1_speed0);
 INVAR (! _lower_joint1_torque0) | (! _equal_joint1_torque0);
+INVAR (! _lower_joint2_speed2) | (! _equal_joint2_speed2);
+INVAR (! _lower_joint2_speed2) | (! _lower_joint2_speed1);
+INVAR (! _lower_joint2_speed2) | (! _equal_joint2_speed1);
+INVAR (! _lower_joint2_speed2) | (! _lower_joint2_speed3);
+INVAR (! _lower_joint2_speed2) | (! _equal_joint2_speed3);
+INVAR (! _lower_joint2_speed2) | (! _lower_joint2_speed0);
+INVAR (! _lower_joint2_speed2) | (! _equal_joint2_speed0);
+INVAR (! _equal_joint2_speed2) | (! _lower_joint2_speed1);
+INVAR (! _equal_joint2_speed2) | (! _equal_joint2_speed1);
+INVAR (! _equal_joint2_speed2) | (! _lower_joint2_speed3);
+INVAR (! _equal_joint2_speed2) | (! _equal_joint2_speed3);
+INVAR (! _equal_joint2_speed2) | (! _lower_joint2_speed0);
+INVAR (! _equal_joint2_speed2) | (! _equal_joint2_speed0);
 INVAR (! _lower_joint2_speed1) | (! _equal_joint2_speed1);
+INVAR (! _lower_joint2_speed1) | (! _lower_joint2_speed3);
+INVAR (! _lower_joint2_speed1) | (! _equal_joint2_speed3);
 INVAR (! _lower_joint2_speed1) | (! _lower_joint2_speed0);
 INVAR (! _lower_joint2_speed1) | (! _equal_joint2_speed0);
+INVAR (! _equal_joint2_speed1) | (! _lower_joint2_speed3);
+INVAR (! _equal_joint2_speed1) | (! _equal_joint2_speed3);
 INVAR (! _equal_joint2_speed1) | (! _lower_joint2_speed0);
 INVAR (! _equal_joint2_speed1) | (! _equal_joint2_speed0);
+INVAR (! _lower_joint2_speed3) | (! _equal_joint2_speed3);
+INVAR (! _lower_joint2_speed3) | (! _lower_joint2_speed0);
+INVAR (! _lower_joint2_speed3) | (! _equal_joint2_speed0);
+INVAR (! _equal_joint2_speed3) | (! _lower_joint2_speed0);
+INVAR (! _equal_joint2_speed3) | (! _equal_joint2_speed0);
 INVAR (! _lower_joint2_speed0) | (! _equal_joint2_speed0);
 INVAR (! _lower_joint4_acc1) | (! _equal_joint4_acc1);
 INVAR (! _lower_joint4_acc1) | (! _lower_joint4_acc0);
@@ -203,14 +296,35 @@ INVAR (! _lower_joint2_angle2) | (! _equal_joint2_angle1);
 INVAR (! _equal_joint2_angle2) | (! _lower_joint2_angle1);
 INVAR (! _equal_joint2_angle2) | (! _equal_joint2_angle1);
 INVAR (! _lower_joint2_angle1) | (! _equal_joint2_angle1);
+INVAR (! _lower_joint3_speed2) | (! _equal_joint3_speed2);
+INVAR (! _lower_joint3_speed2) | (! _lower_joint3_speed1);
+INVAR (! _lower_joint3_speed2) | (! _equal_joint3_speed1);
+INVAR (! _lower_joint3_speed2) | (! _lower_joint3_speed3);
+INVAR (! _lower_joint3_speed2) | (! _equal_joint3_speed3);
+INVAR (! _lower_joint3_speed2) | (! _lower_joint3_speed0);
+INVAR (! _lower_joint3_speed2) | (! _equal_joint3_speed0);
+INVAR (! _equal_joint3_speed2) | (! _lower_joint3_speed1);
+INVAR (! _equal_joint3_speed2) | (! _equal_joint3_speed1);
+INVAR (! _equal_joint3_speed2) | (! _lower_joint3_speed3);
+INVAR (! _equal_joint3_speed2) | (! _equal_joint3_speed3);
+INVAR (! _equal_joint3_speed2) | (! _lower_joint3_speed0);
+INVAR (! _equal_joint3_speed2) | (! _equal_joint3_speed0);
 INVAR (! _lower_joint3_speed1) | (! _equal_joint3_speed1);
+INVAR (! _lower_joint3_speed1) | (! _lower_joint3_speed3);
+INVAR (! _lower_joint3_speed1) | (! _equal_joint3_speed3);
 INVAR (! _lower_joint3_speed1) | (! _lower_joint3_speed0);
 INVAR (! _lower_joint3_speed1) | (! _equal_joint3_speed0);
+INVAR (! _equal_joint3_speed1) | (! _lower_joint3_speed3);
+INVAR (! _equal_joint3_speed1) | (! _equal_joint3_speed3);
 INVAR (! _equal_joint3_speed1) | (! _lower_joint3_speed0);
 INVAR (! _equal_joint3_speed1) | (! _equal_joint3_speed0);
+INVAR (! _lower_joint3_speed3) | (! _equal_joint3_speed3);
+INVAR (! _lower_joint3_speed3) | (! _lower_joint3_speed0);
+INVAR (! _lower_joint3_speed3) | (! _equal_joint3_speed0);
+INVAR (! _equal_joint3_speed3) | (! _lower_joint3_speed0);
+INVAR (! _equal_joint3_speed3) | (! _equal_joint3_speed0);
 INVAR (! _lower_joint3_speed0) | (! _equal_joint3_speed0);
 INVAR (! _lower_ef_speed0) | (! _equal_ef_speed0);
 
 -- Negated Formula
-LTLSPEC !((G(!( _lower_joint1_angle0 | ((((((! _lower_joint1_angle0) & (! _equal_joint1_angle0)) & (! _lower_joint1_angle2)) & (! _equal_joint1_angle2)) & (! _lower_joint1_angle1)) & (! _equal_joint1_angle1))))) & (G(!( _lower_joint2_angle0 | ((((((! _lower_joint2_angle0) & (! _equal_joint2_angle0)) & (! _lower_joint2_angle2)) & (! _equal_joint2_angle2)) & (! _lower_joint2_angle1)) & (! _equal_joint2_angle1))))) & (G(!( _lower_joint3_angle0 | ((((((! _lower_joint3_angle0) & (! _equal_joint3_angle0)) & (! _lower_joint3_angle2)) & (! _equal_joint3_angle2)) & (! _lower_joint3_angle1)) & (! _equal_joint3_angle1))))) & (G(!( _lower_joint4_angle0 | ((((((! _lower_joint4_angle0) & (! _equal_joint4_angle0)) & (! _lower_joint4_angle2)) & (! _equal_joint4_angle2)) & (! _lower_joint4_angle1)) & (! _equal_joint4_angle1))))) & (G(!((((! _lower_joint1_speed1) & (! _equal_joint1_speed1)) & (! _lower_joint1_speed0)) & (! _equal_joint1_speed0)))) & (G(!((((! _lower_joint2_speed1) & (! _equal_joint2_speed1)) & (! _lower_joint2_speed0)) & (! _equal_joint2_speed0)))) & (G(!((((! _lower_joint3_speed1) & (! _equal_joint3_speed1)) & (! _lower_joint3_speed0)) & (! _equal_joint3_speed0)))) & (G(!((((! _lower_joint4_speed1) & (! _equal_joint4_speed1)) & (! _lower_joint4_speed0)) & (! _equal_joint4_speed0)))) & (G(!((((! _lower_joint1_acc1) & (! _equal_joint1_acc1)) & (! _lower_joint1_acc0)) & (! _equal_joint1_acc0)))) & (G(!((((! _lower_joint2_acc1) & (! _equal_joint2_acc1)) & (! _lower_joint2_acc0)) & (! _equal_joint2_acc0)))) & (G(!((((! _lower_joint3_acc1) & (! _equal_joint3_acc1)) & (! _lower_joint3_acc0)) & (! _equal_joint3_acc0)))) & (G(!((((! _lower_joint4_acc1) & (! _equal_joint4_acc1)) & (! _lower_joint4_acc0)) & (! _equal_joint4_acc0)))) & (G(!((((! _lower_ef_force1) & (! _equal_ef_force1)) & (! _lower_ef_force0)) & (! _equal_ef_force0)))) & (G((!((((((( _equal_joint1_speed1 &  _equal_joint2_speed1) &  _equal_joint3_speed1) &  _equal_joint4_speed1) &  _equal_joint1_acc1) &  _equal_joint2_acc1) &  _equal_joint3_acc1) &  _equal_joint4_acc1)) |  arm_idle)) & (G((!( _equal_ef_speed0 &  _equal_ef_acc0)) |  ef_idle)) & ((G(! state_init)) | (F( state_init & (F state_scanning)))) & ((G(! state_scanning)) | (F( state_scanning & (F( state_moving_to_target |  state_alarm))))) & ((G(! state_moving_to_target)) | (F( state_moving_to_target & (F( state_target_reached |  state_alarm))))) & ((G(! state_target_reached)) | (F( state_target_reached & (F( state_grabbing |  state_alarm))))) & ((G(! state_grabbing)) | (F( state_grabbing & (F( state_moving_to_bucket |  state_alarm))))) & ((G(! state_moving_to_bucket)) | (F( state_moving_to_bucket & (F( state_bucket_reached |  state_alarm))))) & ((G(! state_bucket_reached)) | (F( state_bucket_reached & (F( state_releasing |  state_alarm))))) & ((G(! state_releasing)) | (F( state_releasing & (F state_init)))) & (G(( state_init & (! state_scanning)) -> ((G(! state_moving_to_target)) | ((! state_moving_to_target) U  state_scanning)))) & (G(( state_init & (! state_moving_to_target)) -> ((G(! state_target_reached)) | ((! state_target_reached) U  state_moving_to_target)))) & (G(( state_init & (! state_target_reached)) -> ((G(! state_grabbing)) | ((! state_grabbing) U  state_target_reached)))) & (G(( state_init & (! state_grabbing)) -> ((G(! state_moving_to_bucket)) | ((! state_moving_to_bucket) U  state_grabbing)))) & (G(( state_init & (! state_moving_to_bucket)) -> ((G(! state_bucket_reached)) | ((! state_bucket_reached) U  state_moving_to_bucket)))) & (G(( state_init & (! state_bucket_reached)) -> ((G(! state_releasing)) | ((! state_releasing) U  state_bucket_reached)))) & (G(( state_scanning & (!( state_releasing |  state_alarm))) -> ((G(! state_init)) | ((! state_init) U ( state_releasing |  state_alarm))))) & (G(( state_moving_to_target & (! state_init)) -> ((G(! state_scanning)) | ((! state_scanning) U  state_init)))) & (G(( state_target_reached & (! state_init)) -> ((G(! state_moving_to_target)) | ((! state_moving_to_target) U  state_init)))) & (G(( state_grabbing & (! state_init)) -> ((G(! state_target_reached)) | ((! state_target_reached) U  state_init)))) & (G(( state_moving_to_bucket & (! state_init)) -> ((G(! state_grabbing)) | ((! state_grabbing) U  state_init)))) & (G(( state_bucket_reached & (! state_init)) -> ((G(! state_moving_to_bucket)) | ((! state_moving_to_bucket) U  state_init)))) & (G((! state_init) | (!((((((( state_scanning |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_scanning) | (!((((((( state_init |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_moving_to_target) | (!((((((( state_init |  state_scanning) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_target_reached) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_grabbing) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_grabbing) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_moving_to_bucket) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_bucket_reached) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_releasing) |  state_alarm)))) & (G((! state_releasing) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_alarm)))) & (G((! state_alarm) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing)))) & (G(((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)) & (G((! state_init) | (((((( arm_idle &  ef_idle) &  _equal_joint1_angle2) &  _equal_joint2_angle2) &  _equal_joint3_angle2) &  _equal_joint4_angle2) &  _equal_ef_size0))) & ((G(!((((((( state_scanning |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm))) | ((!((((((( state_scanning |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)) U  state_init)) & (G((! state_scanning) | ( arm_idle &  ef_idle))) & (G( state_scanning -> (G object_detected))) & (G( state_scanning -> (G( object_detected -> (F state_moving_to_target))))) & (G( state_moving_to_target -> (F((( _lower_joint1_speed1 |  _lower_joint2_speed1) |  _lower_joint3_speed1) |  _lower_joint4_speed1)))) & (G((! state_moving_to_target) | ( _equal_ef_size0 &  ef_idle))) & (G((! state_target_reached) | ( arm_idle &  ef_idle))) & (G((! state_target_reached) |  _equal_ef_size0)) & (G((! state_grabbing) |  arm_idle)) & (G( state_grabbing -> (G( _lower_ef_size0 & ((! _lower_ef_speed0) & (! _equal_ef_speed0)))))) & (G( state_grabbing -> (F((! _lower_ef_force1) & (X(F( _equal_ef_speed0 &  _equal_ef_acc0))))))) & (G( state_moving_to_bucket -> (F((( _lower_joint1_speed1 |  _lower_joint2_speed1) |  _lower_joint3_speed1) |  _lower_joint4_speed1)))) & (G((! state_moving_to_target) |  ef_idle)) & (G((! state_bucket_reached) | ( arm_idle &  ef_idle))) & (G( state_releasing -> (F( _lower_ef_force1 & (X(F(( _equal_ef_size0 &  _equal_ef_speed0) &  _equal_ef_acc0))))))) & ((G(! alarm_button_pressed)) | (F( alarm_button_pressed & (F state_alarm)))) & (G((! state_alarm) | ( arm_idle &  ef_idle))) & (G((((((! _lower_joint1_torque0) & (! _equal_joint1_torque0)) | ((! _lower_joint2_torque0) & (! _equal_joint2_torque0))) | ((! _lower_joint3_torque0) & (! _equal_joint3_torque0))) | ((! _lower_joint4_torque0) & (! _equal_joint4_torque0))) -> (F state_alarm))));
-
+LTLSPEC !((G(!( _lower_joint1_angle0 | ((((((! _lower_joint1_angle0) & (! _equal_joint1_angle0)) & (! _lower_joint1_angle2)) & (! _equal_joint1_angle2)) & (! _lower_joint1_angle1)) & (! _equal_joint1_angle1))))) & (G(!( _lower_joint2_angle0 | ((((((! _lower_joint2_angle0) & (! _equal_joint2_angle0)) & (! _lower_joint2_angle2)) & (! _equal_joint2_angle2)) & (! _lower_joint2_angle1)) & (! _equal_joint2_angle1))))) & (G(!( _lower_joint3_angle0 | ((((((! _lower_joint3_angle0) & (! _equal_joint3_angle0)) & (! _lower_joint3_angle2)) & (! _equal_joint3_angle2)) & (! _lower_joint3_angle1)) & (! _equal_joint3_angle1))))) & (G(!( _lower_joint4_angle0 | ((((((! _lower_joint4_angle0) & (! _equal_joint4_angle0)) & (! _lower_joint4_angle2)) & (! _equal_joint4_angle2)) & (! _lower_joint4_angle1)) & (! _equal_joint4_angle1))))) & (G(!((((((((! _lower_joint1_speed2) & (! _equal_joint1_speed2)) & (! _lower_joint1_speed1)) & (! _equal_joint1_speed1)) & (! _lower_joint1_speed3)) & (! _equal_joint1_speed3)) & (! _lower_joint1_speed0)) & (! _equal_joint1_speed0)))) & (G(!((((((((! _lower_joint2_speed2) & (! _equal_joint2_speed2)) & (! _lower_joint2_speed1)) & (! _equal_joint2_speed1)) & (! _lower_joint2_speed3)) & (! _equal_joint2_speed3)) & (! _lower_joint2_speed0)) & (! _equal_joint2_speed0)))) & (G(!((((((((! _lower_joint3_speed2) & (! _equal_joint3_speed2)) & (! _lower_joint3_speed1)) & (! _equal_joint3_speed1)) & (! _lower_joint3_speed3)) & (! _equal_joint3_speed3)) & (! _lower_joint3_speed0)) & (! _equal_joint3_speed0)))) & (G(!((((((((! _lower_joint4_speed2) & (! _equal_joint4_speed2)) & (! _lower_joint4_speed1)) & (! _equal_joint4_speed1)) & (! _lower_joint4_speed3)) & (! _equal_joint4_speed3)) & (! _lower_joint4_speed0)) & (! _equal_joint4_speed0)))) & (G(!((((! _lower_joint1_acc1) & (! _equal_joint1_acc1)) & (! _lower_joint1_acc0)) & (! _equal_joint1_acc0)))) & (G(!((((! _lower_joint2_acc1) & (! _equal_joint2_acc1)) & (! _lower_joint2_acc0)) & (! _equal_joint2_acc0)))) & (G(!((((! _lower_joint3_acc1) & (! _equal_joint3_acc1)) & (! _lower_joint3_acc0)) & (! _equal_joint3_acc0)))) & (G(!((((! _lower_joint4_acc1) & (! _equal_joint4_acc1)) & (! _lower_joint4_acc0)) & (! _equal_joint4_acc0)))) & (G(!((((! _lower_ef_force1) & (! _equal_ef_force1)) & (! _lower_ef_force0)) & (! _equal_ef_force0)))) & (G(! _lower_proximity_sensor0)) & (G((! arm_idle) | ((((((( _equal_joint1_speed1 &  _equal_joint2_speed1) &  _equal_joint3_speed1) &  _equal_joint4_speed1) &  _equal_joint1_acc1) &  _equal_joint2_acc1) &  _equal_joint3_acc1) &  _equal_joint4_acc1))) & (G((!((((((( _equal_joint1_speed1 &  _equal_joint2_speed1) &  _equal_joint3_speed1) &  _equal_joint4_speed1) &  _equal_joint1_acc1) &  _equal_joint2_acc1) &  _equal_joint3_acc1) &  _equal_joint4_acc1)) |  arm_idle)) & (G((!((((( _lower_joint1_speed2 |  _equal_joint1_speed2) |  _lower_joint1_speed1) | (( _lower_joint2_speed2 |  _equal_joint2_speed2) |  _lower_joint2_speed1)) | (( _lower_joint3_speed2 |  _equal_joint3_speed2) |  _lower_joint3_speed1)) | (( _lower_joint4_speed2 |  _equal_joint4_speed2) |  _lower_joint4_speed1))) |  arm_moving)) & (G((! arm_moving) | ((((( _lower_joint1_speed2 |  _equal_joint1_speed2) |  _lower_joint1_speed1) | (( _lower_joint2_speed2 |  _equal_joint2_speed2) |  _lower_joint2_speed1)) | (( _lower_joint3_speed2 |  _equal_joint3_speed2) |  _lower_joint3_speed1)) | (( _lower_joint4_speed2 |  _equal_joint4_speed2) |  _lower_joint4_speed1)))) & (G((! ef_idle) | ( _equal_ef_speed0 &  _equal_ef_acc0))) & (G((!( _equal_ef_speed0 &  _equal_ef_acc0)) |  ef_idle)) & ((G(! state_init)) | (F( state_init & (F state_scanning)))) & ((G(! state_scanning)) | (F( state_scanning & (F( state_moving_to_target |  state_alarm))))) & ((G(! state_moving_to_target)) | (F( state_moving_to_target & (F( state_target_reached |  state_alarm))))) & ((G(! state_target_reached)) | (F( state_target_reached & (F( state_grabbing |  state_alarm))))) & ((G(! state_grabbing)) | (F( state_grabbing & (F( state_moving_to_bucket |  state_alarm))))) & ((G(! state_moving_to_bucket)) | (F( state_moving_to_bucket & (F( state_bucket_reached |  state_alarm))))) & ((G(! state_bucket_reached)) | (F( state_bucket_reached & (F( state_releasing |  state_alarm))))) & ((G(! state_releasing)) | (F( state_releasing & (F state_init)))) & (G(( state_init & (! state_scanning)) -> ((G(! state_moving_to_target)) | ((! state_moving_to_target) U  state_scanning)))) & (G(( state_init & (! state_moving_to_target)) -> ((G(! state_target_reached)) | ((! state_target_reached) U  state_moving_to_target)))) & (G(( state_init & (! state_target_reached)) -> ((G(! state_grabbing)) | ((! state_grabbing) U  state_target_reached)))) & (G(( state_init & (! state_grabbing)) -> ((G(! state_moving_to_bucket)) | ((! state_moving_to_bucket) U  state_grabbing)))) & (G(( state_init & (! state_moving_to_bucket)) -> ((G(! state_bucket_reached)) | ((! state_bucket_reached) U  state_moving_to_bucket)))) & (G(( state_init & (! state_bucket_reached)) -> ((G(! state_releasing)) | ((! state_releasing) U  state_bucket_reached)))) & (G(( state_scanning & (!( state_releasing |  state_alarm))) -> ((G(! state_init)) | ((! state_init) U ( state_releasing |  state_alarm))))) & (G(( state_moving_to_target & (! state_init)) -> ((G(! state_scanning)) | ((! state_scanning) U  state_init)))) & (G(( state_target_reached & (! state_init)) -> ((G(! state_moving_to_target)) | ((! state_moving_to_target) U  state_init)))) & (G(( state_grabbing & (! state_init)) -> ((G(! state_target_reached)) | ((! state_target_reached) U  state_init)))) & (G(( state_moving_to_bucket & (! state_init)) -> ((G(! state_grabbing)) | ((! state_grabbing) U  state_init)))) & (G(( state_bucket_reached & (! state_init)) -> ((G(! state_moving_to_bucket)) | ((! state_moving_to_bucket) U  state_init)))) & (G((! state_init) | (!((((((( state_scanning |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_scanning) | (!((((((( state_init |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_moving_to_target) | (!((((((( state_init |  state_scanning) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_target_reached) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_grabbing) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_grabbing) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_moving_to_bucket) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_bucket_reached) |  state_releasing) |  state_alarm)))) & (G((! state_bucket_reached) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_releasing) |  state_alarm)))) & (G((! state_releasing) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_alarm)))) & (G((! state_alarm) | (!((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing)))) & (G(((((((( state_init |  state_scanning) |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)) & (G((! state_init) | (((((( arm_idle &  ef_idle) &  _equal_joint1_angle2) &  _equal_joint2_angle2) &  _equal_joint3_angle2) &  _equal_joint4_angle2) &  _equal_ef_size0))) & ((G(!((((((( state_scanning |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm))) | ((!((((((( state_scanning |  state_moving_to_target) |  state_target_reached) |  state_grabbing) |  state_moving_to_bucket) |  state_bucket_reached) |  state_releasing) |  state_alarm)) U  state_init)) & (G((! state_scanning) | ( arm_idle &  ef_idle))) & (G( state_scanning -> (G object_detected))) & (G( state_scanning -> (G( object_detected -> (F state_moving_to_target))))) & (G( state_moving_to_target -> (F arm_moving))) & (G((! state_moving_to_target) | ( _equal_ef_size0 &  ef_idle))) & (G((! state_target_reached) | ( arm_idle &  ef_idle))) & (G((! state_target_reached) |  _equal_ef_size0)) & (G((! state_grabbing) |  arm_idle)) & (G( state_grabbing -> (G( _lower_ef_size0 & ((! _lower_ef_speed0) & (! _equal_ef_speed0)))))) & (G( state_grabbing -> (F((! _lower_ef_force1) & (X(F( _equal_ef_speed0 &  _equal_ef_acc0))))))) & (G( state_moving_to_bucket -> (F arm_moving))) & (G((! state_moving_to_target) |  ef_idle)) & (G((! state_bucket_reached) | ( arm_idle &  ef_idle))) & (G( state_releasing -> (F( _lower_ef_force1 & (X(F(( _equal_ef_size0 &  _equal_ef_speed0) &  _equal_ef_acc0))))))) & ((G(! alarm_button_pressed)) | (F( alarm_button_pressed & (F state_alarm)))) & (G((! state_alarm) | ( arm_idle &  ef_idle))) & (G((((((! _lower_joint1_torque0) & (! _equal_joint1_torque0)) | ((! _lower_joint2_torque0) & (! _equal_joint2_torque0))) | ((! _lower_joint3_torque0) & (! _equal_joint3_torque0))) | ((! _lower_joint4_torque0) & (! _equal_joint4_torque0))) -> (F state_alarm))) & (G((( _lower_proximity_sensor0 |  _equal_proximity_sensor0) |  _lower_proximity_sensor1) -> (F arm_idle))) & (G((!(( _lower_proximity_sensor0 |  _equal_proximity_sensor0) |  _lower_proximity_sensor1)) | (((! _lower_joint1_speed2) & (! _equal_joint1_speed2)) & (((( _lower_joint1_speed2 |  _equal_joint1_speed2) |  _lower_joint1_speed1) |  _equal_joint1_speed1) |  _lower_joint1_speed3)))) & (G((!(( _lower_proximity_sensor0 |  _equal_proximity_sensor0) |  _lower_proximity_sensor1)) | (((! _lower_joint2_speed2) & (! _equal_joint2_speed2)) & (((( _lower_joint2_speed2 |  _equal_joint2_speed2) |  _lower_joint2_speed1) |  _equal_joint2_speed1) |  _lower_joint2_speed3)))) & (G((!(( _lower_proximity_sensor0 |  _equal_proximity_sensor0) |  _lower_proximity_sensor1)) | (((! _lower_joint3_speed2) & (! _equal_joint3_speed2)) & (((( _lower_joint3_speed2 |  _equal_joint3_speed2) |  _lower_joint3_speed1) |  _equal_joint3_speed1) |  _lower_joint3_speed3)))) & (G((!(( _lower_proximity_sensor0 |  _equal_proximity_sensor0) |  _lower_proximity_sensor1)) | (((! _lower_joint4_speed2) & (! _equal_joint4_speed2)) & (((( _lower_joint4_speed2 |  _equal_joint4_speed2) |  _lower_joint4_speed1) |  _equal_joint4_speed1) |  _lower_joint4_speed3)))));
