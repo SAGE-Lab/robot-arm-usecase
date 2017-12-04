@@ -33,8 +33,13 @@ Globally, it is never the case that joint1_acc > 10 holds.
 Globally, it is never the case that joint2_acc > 10 holds.
 Globally, it is never the case that joint3_acc > 10 holds.
 Globally, it is never the case that joint4_acc > 10 holds.
-Globally, it is never the case that ef_force > 2.5 holds. 
-Globally, it is always the case that if joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds, then arm_idle holds as well. 
+Globally, it is never the case that ef_force > 2.5 holds.
+Globally, it is never the case that proximity_sensor < 0 holds.
+Globally, it is always the case that if arm_idle holds, then joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds as well.
+Globally, it is always the case that if joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds, then arm_idle holds as well.
+Globally, it is always the case that if joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 holds, then arm_moving holds as well.
+Globally, it is always the case that if arm_moving holds, then joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 holds as well.
+Globally, it is always the case that if ef_idle holds, then ef_speed = 0 and ef_acc = 0 holds as well.
 Globally, it is always the case that if ef_speed = 0 and ef_acc = 0 holds, then ef_idle holds as well.
 
 
@@ -87,7 +92,7 @@ After state_scanning, it is always the case that object_detected holds.
 After state_scanning, it is always the case that if object_detected holds, then state_moving_to_target eventually holds.
 
 # Moving to target state requirements
-Globally, it is always the case that if state_moving_to_target holds, then joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 eventually holds.
+Globally, it is always the case that if state_moving_to_target holds, then arm_moving eventually holds.
 Globally, it is always the case that if state_moving_to_target holds, then ef_size = 1.8 and ef_idle holds as well.
 
 # Target reached state requirements
@@ -100,7 +105,7 @@ After state_grabbing, it is always the case that ef_size < 1.8 and ef_speed > 0 
 Globally, it is always the case that if state_grabbing holds, then ef_force >= 1 eventually holds and is succeeded by ef_speed = 0 and ef_acc = 0 .
 
 # Moving to bucket state requirements
-Globally, it is always the case that if state_moving_to_bucket holds, then joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 eventually holds.
+Globally, it is always the case that if state_moving_to_bucket holds, then arm_moving eventually holds.
 Globally, it is always the case that if state_moving_to_target holds, then ef_idle holds as well.
 
 # Bucket reached state requirements
@@ -114,4 +119,9 @@ After alarm_button_pressed, state_alarm eventually holds.
 Globally, it is always the case that if state_alarm holds, then arm_idle and ef_idle holds as well.
 Globally, it is always the case that if joint1_torque > 10.0 or joint2_torque > 10.0 or  joint3_torque > 10.0 or  joint4_torque > 10.0 holds, then state_alarm eventually holds.
 
-
+# Proximity Sensor requirements
+Globally, it is always the case that if proximity_sensor < 20 holds, then arm_idle eventually holds.
+Globally, it is always the case that if proximity_sensor < 20 holds, then joint1_speed > -20 and joint1_speed < 20 holds as well.
+Globally, it is always the case that if proximity_sensor < 20 holds, then joint2_speed > -20 and joint2_speed < 20 holds as well.
+Globally, it is always the case that if proximity_sensor < 20 holds, then joint3_speed > -20 and joint3_speed < 20 holds as well.
+Globally, it is always the case that if proximity_sensor < 20 holds, then joint4_speed > -20 and joint4_speed < 20 holds as well.
