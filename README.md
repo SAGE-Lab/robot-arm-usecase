@@ -6,31 +6,35 @@ The requirements specify the intended behaviour of a robotic arm placed on a sur
 The robotic arm, after initialization, searches for one of the objects placed on the surface, moves to the target position and grab the object. After grabbing, it shall move the object in a container placed in a fixed area of the surface and release it, without touching the container.
 During normal operation, if the red alarm button is pressed, the robot shall stop as soon as possible. The robot shall stop even in the case of an unintended collision with other objects or with the robot itself (collisions can be detected using joints’ torque).
 
+The full list of requirements describing the usecase is defined [here](requirements/robot-arm-usecase.req), while the [csv file](requirements.csv) contains the same lists of requirements enumerated and labeled with their pattern type (in the form of \<pattern name\>_\<scope type\>).
+
 ## Signals
 In order to describe the usecase with PSPs, the following boolean and numeric signals are defined:
 
-| Boolean Signals        | Numeric Signals  |
-| ---------------------- | ---------------- |
-| state_init             | joint1_angle     |
-| state_scanning         | joint2_angle     |
-| state_moving_to_target | joint3_angle     |
-| state_target_reached   | joint4_angle     |
-| state_grabbing         | joint1_speed     |
-| state_moving_to_bucket | joint2_speed     |
-| state_bucket_reached   | joint3_speed     |
-| state_releasing        | joint4_speed     | 
-| state_alarm            | joint1_acc       |
-| arm_idle               | joint2_acc       |
-| arm_moving             | joint3_acc       |
-| ef_idle                | joint4_acc       |
-| alarm_button_pressed   | joint1_torque    | 
-| object_detected        | joint2_torque    |
-|                        | joint3_torque    |
-|                        | joint4_torque    | 
-|                        | ef_force         |
-|                        | ef_speed         |
-|                        | ef_acc           |
-|                        | proximity_sensor |
+| Boolean Signals        |                        | Numerical Signals  |                    |
+| ---------------------- | ---------------------- | ------------------ | ------------------ |
+| state_init             | arm_moving             | joint1_angle       | joint3_acc         |
+| state_scanning         | ef_idle                | joint2_angle       | joint4_acc         |
+| state_moving_to_target | alarm_button_pressed   | joint3_angle       | joint1_torque      | 
+| state_target_reached   | object_detected        | joint4_angle       | joint2_torque      |
+| state_grabbing         |                        | joint1_speed       | joint3_torque      |
+| state_moving_to_bucket |                        | joint2_speed       | joint4_torque      | 
+| state_bucket_reached   |                        | joint3_speed       | ef_force           |
+| state_releasing        |                        | joint4_speed       | ef_speed           |
+| state_alarm            |                        | joint1_acc         | ef_acc             |
+| arm_idle               |                        | joint2_acc         | proximity_sensor   |
+
+There are 14 boolean signals and 20 numerical ones. 
+PSPs don't allow to specify the unit of measurements for numerical signals, so the following units are used by default:
+- joint angles are expressed in `deg`
+- joint speed is expressed in `deg\s`
+- joint accelleration is expressed in `deg\s^2`
+- torque is expressed in `N·m`
+- end effector (ef) size is expressed in `cm`
+- ef force is expressed in `N`
+- proximity sensor value is expressed in `cm`
+
+
 
 
 ## References
