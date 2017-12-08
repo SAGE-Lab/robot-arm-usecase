@@ -3,10 +3,14 @@ This reopository contains the set of requirements written in an extended version
 
 ## Usecase 
 The requirements specify the intended behaviour of a robotic arm placed on a surface, close to some objects and a bucket placed on the same plane.
+The robot is composed of a 4 degrees-of-freedom arm having a gripper as end-effector and some sensors to detect the environment state.
+
 The robotic arm, after initialization, searches for one of the objects placed on the surface, moves to the target position and grab the object. After grabbing, it shall move the object in a container placed in a fixed area of the surface and release it, without touching the container.
 During normal operation, if the red alarm button is pressed, the robot shall stop as soon as possible. The robot shall stop even in the case of an unintended collision with other objects or with the robot itself (collisions can be detected using joints’ torque).
 
 The full list of requirements describing the usecase is defined [here](requirements/robot-arm-usecase.req), while the [csv file](requirements.csv) contains the same lists of requirements enumerated and labeled with their pattern type (in the form of \<pattern name\>_\<scope type\>).
+
+![robot arm screenshot](img/robot-arm.png)
 
 ## Signals
 In order to describe the usecase with PSPs, the following boolean and numeric signals are defined:
