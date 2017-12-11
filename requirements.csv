@@ -1,75 +1,86 @@
-1,"Globally, it is never the case that joint1_angle < -170 or joint1_angle > 170 holds.",AbsenceRequirement_GLOBALLY;
-2,"Globally, it is never the case that joint2_angle < -130 or joint2_angle > 130 holds.",AbsenceRequirement_GLOBALLY;
-3,"Globally, it is never the case that joint3_angle < -130 or joint3_angle > 130 holds.",AbsenceRequirement_GLOBALLY;
-4,"Globally, it is never the case that joint4_angle < -90 or joint4_angle > 90 holds.",AbsenceRequirement_GLOBALLY;
-5,"Globally, it is never the case that joint1_speed > 90 holds.",AbsenceRequirement_GLOBALLY;
-6,"Globally, it is never the case that joint2_speed > 90 holds.",AbsenceRequirement_GLOBALLY;
-7,"Globally, it is never the case that joint3_speed > 90 holds.",AbsenceRequirement_GLOBALLY;
-8,"Globally, it is never the case that joint4_speed > 90 holds.",AbsenceRequirement_GLOBALLY;
-9,"Globally, it is never the case that joint1_acc > 10 holds.",AbsenceRequirement_GLOBALLY;
-10,"Globally, it is never the case that joint2_acc > 10 holds.",AbsenceRequirement_GLOBALLY;
-11,"Globally, it is never the case that joint3_acc > 10 holds.",AbsenceRequirement_GLOBALLY;
-12,"Globally, it is never the case that joint4_acc > 10 holds.",AbsenceRequirement_GLOBALLY;
-13,"Globally, it is never the case that ef_force > 2.5 holds.",AbsenceRequirement_GLOBALLY;
-14,"Globally, it is never the case that proximity_sensor < 0 holds.",AbsenceRequirement_GLOBALLY;
-15,"Globally, it is always the case that if arm_idle holds, then joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds as well.",InvariantRequirement_GLOBALLY;
-16,"Globally, it is always the case that if joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds, then arm_idle holds as well.",InvariantRequirement_GLOBALLY;
-17,"Globally, it is always the case that if joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 holds, then arm_moving holds as well.",InvariantRequirement_GLOBALLY;
-18,"Globally, it is always the case that if arm_moving holds, then joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 holds as well.",InvariantRequirement_GLOBALLY;
-19,"Globally, it is always the case that if ef_idle holds, then ef_speed = 0 and ef_acc = 0 holds as well.",InvariantRequirement_GLOBALLY;
-20,"Globally, it is always the case that if ef_speed = 0 and ef_acc = 0 holds, then ef_idle holds as well.",InvariantRequirement_GLOBALLY;
-21,"After state_init, state_scanning eventually holds.",ExistenceRequirement_AFTER;
-22,"After state_scanning, state_moving_to_target or state_alarm eventually holds.",ExistenceRequirement_AFTER;
-23,"After state_moving_to_target, state_target_reached or state_alarm eventually holds.",ExistenceRequirement_AFTER;
-24,"After state_target_reached, state_grabbing or state_alarm eventually holds.",ExistenceRequirement_AFTER;
-25,"After state_grabbing, state_moving_to_bucket or state_alarm eventually holds.",ExistenceRequirement_AFTER;
-26,"After state_moving_to_bucket, state_bucket_reached or state_alarm eventually holds.",ExistenceRequirement_AFTER;
-27,"After state_bucket_reached, state_releasing or state_alarm eventually holds.",ExistenceRequirement_AFTER;
-28,"After state_releasing, state_init eventually holds.",ExistenceRequirement_AFTER;
-29,"After state_init until state_scanning, it is never the case that state_moving_to_target holds.",AbsenceRequirement_AFTER_UNTIL;
-30,"After state_init until state_moving_to_target, it is never the case that state_target_reached holds.",AbsenceRequirement_AFTER_UNTIL;
-31,"After state_init until state_target_reached, it is never the case that state_grabbing holds.",AbsenceRequirement_AFTER_UNTIL;
-32,"After state_init until state_grabbing, it is never the case that state_moving_to_bucket holds.",AbsenceRequirement_AFTER_UNTIL;
-33,"After state_init until state_moving_to_bucket, it is never the case that state_bucket_reached holds.",AbsenceRequirement_AFTER_UNTIL;
-34,"After state_init until state_bucket_reached, it is never the case that state_releasing holds.",AbsenceRequirement_AFTER_UNTIL;
-35,"After state_scanning until state_releasing or state_alarm, it is never the case that state_init holds.",AbsenceRequirement_AFTER_UNTIL;
-36,"After state_moving_to_target until state_init, it is never the case that state_scanning holds.",AbsenceRequirement_AFTER_UNTIL;
-37,"After state_target_reached until state_init, it is never the case that state_moving_to_target holds.",AbsenceRequirement_AFTER_UNTIL;
-38,"After state_grabbing until state_init, it is never the case that state_target_reached holds.",AbsenceRequirement_AFTER_UNTIL;
-39,"After state_moving_to_bucket until state_init, it is never the case that state_grabbing holds.",AbsenceRequirement_AFTER_UNTIL;
-40,"After state_bucket_reached until state_init, it is never the case that state_moving_to_bucket holds.",AbsenceRequirement_AFTER_UNTIL;
-41,"Globally, it is always the case that if state_init holds, then not (state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-42,"Globally, it is always the case that if state_scanning holds, then not (state_init or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-43,"Globally, it is always the case that if state_moving_to_target holds, then not (state_init or state_scanning or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-44,"Globally, it is always the case that if state_target_reached holds, then not (state_init or state_scanning or state_moving_to_target or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-45,"Globally, it is always the case that if state_grabbing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-46,"Globally, it is always the case that if state_grabbing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-47,"Globally, it is always the case that if state_moving_to_bucket holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-48,"Globally, it is always the case that if state_bucket_reached holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-49,"Globally, it is always the case that if state_releasing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_alarm) holds as well.",InvariantRequirement_GLOBALLY;
-50,"Globally, it is always the case that if state_alarm holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing) holds as well.",InvariantRequirement_GLOBALLY;
-51,"Globally, it is always the case that (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds.",UniversalityRequirement_GLOBALLY;
-52,"Globally, it is always the case that if state_init holds, then arm_idle and ef_idle and joint1_angle = 0 and joint2_angle = 0 and joint3_angle = 0 and joint4_angle = 0 and ef_size = 1.8 holds as well.",InvariantRequirement_GLOBALLY;
-53,"Globally, it is always the case that if (state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds, then state_init previously held.",PrecedenceRequirement_GLOBALLY;
-54,"Globally, it is always the case that if state_scanning holds, then arm_idle and ef_idle holds as well.",InvariantRequirement_GLOBALLY;
-55,"After state_scanning, it is always the case that object_detected holds.",UniversalityRequirement_AFTER;
-56,"After state_scanning, it is always the case that if object_detected holds, then state_moving_to_target eventually holds.",ResponseRequirement_AFTER;
-57,"Globally, it is always the case that if state_moving_to_target holds, then arm_moving eventually holds.",ResponseRequirement_GLOBALLY;
-58,"Globally, it is always the case that if state_moving_to_target holds, then ef_size = 1.8 and ef_idle holds as well.",InvariantRequirement_GLOBALLY;
-59,"Globally, it is always the case that if state_target_reached holds, then arm_idle and ef_idle holds as well.",InvariantRequirement_GLOBALLY;
-60,"Globally, it is always the case that if state_target_reached holds, then ef_size = 1.8 holds as well.",InvariantRequirement_GLOBALLY;
-61,"Globally, it is always the case that if state_grabbing holds, then arm_idle holds as well.",InvariantRequirement_GLOBALLY;
-62,"After state_grabbing, it is always the case that ef_size < 1.8 and ef_speed > 0 holds.",UniversalityRequirement_AFTER;
-63,"Globally, it is always the case that if state_grabbing holds, then ef_force >= 1 eventually holds and is succeeded by ef_speed = 0 and ef_acc = 0 .",ResponseChain12Requirement_GLOBALLY;
-64,"Globally, it is always the case that if state_moving_to_bucket holds, then arm_moving eventually holds.",ResponseRequirement_GLOBALLY;
-65,"Globally, it is always the case that if state_moving_to_target holds, then ef_idle holds as well.",InvariantRequirement_GLOBALLY;
-66,"Globally, it is always the case that if state_bucket_reached holds, then arm_idle and ef_idle holds as well.",InvariantRequirement_GLOBALLY;
-67,"Globally, it is always the case that if state_releasing holds, then ef_force < 1 eventually holds and is succeeded by ef_size = 1.8 and ef_speed = 0 and ef_acc = 0 .",ResponseChain12Requirement_GLOBALLY;
-68,"After alarm_button_pressed, state_alarm eventually holds.",ExistenceRequirement_AFTER;
-69,"Globally, it is always the case that if state_alarm holds, then arm_idle and ef_idle holds as well.",InvariantRequirement_GLOBALLY;
-70,"Globally, it is always the case that if joint1_torque > 10.0 or joint2_torque > 10.0 or  joint3_torque > 10.0 or  joint4_torque > 10.0 holds, then state_alarm eventually holds.",ResponseRequirement_GLOBALLY;
-71,"Globally, it is always the case that if proximity_sensor < 20 holds, then arm_idle eventually holds.",ResponseRequirement_GLOBALLY;
-72,"Globally, it is always the case that if proximity_sensor < 20 holds, then joint1_speed > -20 and joint1_speed < 20 holds as well.",InvariantRequirement_GLOBALLY;
-73,"Globally, it is always the case that if proximity_sensor < 20 holds, then joint2_speed > -20 and joint2_speed < 20 holds as well.",InvariantRequirement_GLOBALLY;
-74,"Globally, it is always the case that if proximity_sensor < 20 holds, then joint3_speed > -20 and joint3_speed < 20 holds as well.",InvariantRequirement_GLOBALLY;
-75,"Globally, it is always the case that if proximity_sensor < 20 holds, then joint4_speed > -20 and joint4_speed < 20 holds as well.",InvariantRequirement_GLOBALLY;
+Red. ID,Requirement,Type
+1,"Globally, it is never the case that joint1_angle < -170 or joint1_angle > 170 holds.",AbsenceRequirement_GLOBALLY
+2,"Globally, it is never the case that joint2_angle < -130 or joint2_angle > 130 holds.",AbsenceRequirement_GLOBALLY
+3,"Globally, it is never the case that joint3_angle < -130 or joint3_angle > 130 holds.",AbsenceRequirement_GLOBALLY
+4,"Globally, it is never the case that joint4_angle < -90 or joint4_angle > 90 holds.",AbsenceRequirement_GLOBALLY
+5,"Globally, it is never the case that joint1_speed > 90 holds.",AbsenceRequirement_GLOBALLY
+6,"Globally, it is never the case that joint2_speed > 90 holds.",AbsenceRequirement_GLOBALLY
+7,"Globally, it is never the case that joint3_speed > 90 holds.",AbsenceRequirement_GLOBALLY
+8,"Globally, it is never the case that joint4_speed > 90 holds.",AbsenceRequirement_GLOBALLY
+9,"Globally, it is never the case that joint1_acc > 10 holds.",AbsenceRequirement_GLOBALLY
+10,"Globally, it is never the case that joint2_acc > 10 holds.",AbsenceRequirement_GLOBALLY
+11,"Globally, it is never the case that joint3_acc > 10 holds.",AbsenceRequirement_GLOBALLY
+12,"Globally, it is never the case that joint4_acc > 10 holds.",AbsenceRequirement_GLOBALLY
+13,"Globally, it is never the case that ef_force > 2.5 holds.",AbsenceRequirement_GLOBALLY
+14,"Globally, it is never the case that proximity_sensor < 0 holds.",AbsenceRequirement_GLOBALLY
+15,"Globally, it is always the case that if arm_idle holds, then joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds as well.",InvariantRequirement_GLOBALLY
+16,"Globally, it is always the case that if joint1_speed = 0 and joint2_speed = 0 and joint3_speed = 0 and joint4_speed = 0 and joint1_acc = 0 and joint2_acc = 0 and joint3_acc = 0 and joint4_acc = 0 holds, then arm_idle holds as well.",InvariantRequirement_GLOBALLY
+17,"Globally, it is always the case that if joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 holds, then arm_moving holds as well.",InvariantRequirement_GLOBALLY
+18,"Globally, it is always the case that if arm_moving holds, then joint1_speed != 0 or joint2_speed != 0 or joint3_speed != 0 or joint4_speed != 0 holds as well.",InvariantRequirement_GLOBALLY
+19,"Globally, it is always the case that if ef_idle holds, then ef_speed = 0 and ef_acc = 0 holds as well.",InvariantRequirement_GLOBALLY
+20,"Globally, it is always the case that if ef_speed = 0 and ef_acc = 0 holds, then ef_idle holds as well.",InvariantRequirement_GLOBALLY
+21,"After state_init, state_scanning eventually holds.",ExistenceRequirement_AFTER
+22,"After state_scanning, state_moving_to_target or state_alarm eventually holds.",ExistenceRequirement_AFTER
+23,"After state_moving_to_target, state_target_reached or state_alarm eventually holds.",ExistenceRequirement_AFTER
+24,"After state_target_reached, state_grabbing or state_alarm eventually holds.",ExistenceRequirement_AFTER
+25,"After state_grabbing, state_moving_to_bucket or state_alarm eventually holds.",ExistenceRequirement_AFTER
+26,"After state_moving_to_bucket, state_bucket_reached or state_alarm eventually holds.",ExistenceRequirement_AFTER
+27,"After state_bucket_reached, state_releasing or state_alarm eventually holds.",ExistenceRequirement_AFTER
+28,"After state_releasing, state_init eventually holds.",ExistenceRequirement_AFTER
+29,"After state_init until state_scanning, it is never the case that state_moving_to_target holds.",AbsenceRequirement_AFTER_UNTIL
+30,"After state_init until state_moving_to_target, it is never the case that state_target_reached holds.",AbsenceRequirement_AFTER_UNTIL
+31,"After state_init until state_target_reached, it is never the case that state_grabbing holds.",AbsenceRequirement_AFTER_UNTIL
+32,"After state_init until state_grabbing, it is never the case that state_moving_to_bucket holds.",AbsenceRequirement_AFTER_UNTIL
+33,"After state_init until state_moving_to_bucket, it is never the case that state_bucket_reached holds.",AbsenceRequirement_AFTER_UNTIL
+34,"After state_init until state_bucket_reached, it is never the case that state_releasing holds.",AbsenceRequirement_AFTER_UNTIL
+35,"After state_scanning until state_releasing or state_alarm, it is never the case that state_init holds.",AbsenceRequirement_AFTER_UNTIL
+36,"After state_moving_to_target until state_init, it is never the case that state_scanning holds.",AbsenceRequirement_AFTER_UNTIL
+37,"After state_target_reached until state_init, it is never the case that state_moving_to_target holds.",AbsenceRequirement_AFTER_UNTIL
+38,"After state_grabbing until state_init, it is never the case that state_target_reached holds.",AbsenceRequirement_AFTER_UNTIL
+39,"After state_moving_to_bucket until state_init, it is never the case that state_grabbing holds.",AbsenceRequirement_AFTER_UNTIL
+40,"After state_bucket_reached until state_init, it is never the case that state_moving_to_bucket holds.",AbsenceRequirement_AFTER_UNTIL
+41,"Globally, it is always the case that if state_init holds, then not (state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+42,"Globally, it is always the case that if state_scanning holds, then not (state_init or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+43,"Globally, it is always the case that if state_moving_to_target holds, then not (state_init or state_scanning or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+44,"Globally, it is always the case that if state_target_reached holds, then not (state_init or state_scanning or state_moving_to_target or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+45,"Globally, it is always the case that if state_grabbing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+46,"Globally, it is always the case that if state_grabbing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+47,"Globally, it is always the case that if state_moving_to_bucket holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_bucket_reached or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+48,"Globally, it is always the case that if state_bucket_reached holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_releasing or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+49,"Globally, it is always the case that if state_releasing holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_alarm) holds as well.",InvariantRequirement_GLOBALLY
+50,"Globally, it is always the case that if state_alarm holds, then not (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing) holds as well.",InvariantRequirement_GLOBALLY
+51,"Globally, it is always the case that (state_init or state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds.",UniversalityRequirement_GLOBALLY
+52,"Globally, it is always the case that if state_init holds, then arm_idle and ef_idle and joint1_angle = 0 and joint2_angle = 0 and joint3_angle = 0 and joint4_angle = 0 and ef_size = 1.8 holds as well.",InvariantRequirement_GLOBALLY
+53,"Globally, it is always the case that if (state_scanning or state_moving_to_target or state_target_reached or state_grabbing or state_moving_to_bucket or state_bucket_reached or state_releasing or state_alarm) holds, then state_init previously held.",PrecedenceRequirement_GLOBALLY
+54,"Globally, it is always the case that if state_scanning holds, then arm_idle and ef_idle holds as well.",InvariantRequirement_GLOBALLY
+55,"After state_scanning, it is always the case that object_detected holds.",UniversalityRequirement_AFTER
+56,"After state_scanning, it is always the case that if object_detected holds, then state_moving_to_target eventually holds.",ResponseRequirement_AFTER
+57,"Globally, it is always the case that if state_moving_to_target holds, then arm_moving eventually holds.",ResponseRequirement_GLOBALLY
+58,"Globally, it is always the case that if state_moving_to_target holds, then ef_size = 1.8 and ef_idle holds as well.",InvariantRequirement_GLOBALLY
+59,"Globally, it is always the case that if state_target_reached holds, then arm_idle and ef_idle holds as well.",InvariantRequirement_GLOBALLY
+60,"Globally, it is always the case that if state_target_reached holds, then ef_size = 1.8 holds as well.",InvariantRequirement_GLOBALLY
+61,"Globally, it is always the case that if state_grabbing holds, then arm_idle holds as well.",InvariantRequirement_GLOBALLY
+62,"After state_grabbing, it is always the case that ef_size < 1.8 and ef_speed > 0 holds.",UniversalityRequirement_AFTER
+63,"Globally, it is always the case that if state_grabbing holds, then ef_force >= 1 eventually holds and is succeeded by ef_speed = 0 and ef_acc = 0 .",ResponseChain12Requirement_GLOBALLY
+64,"Globally, it is always the case that if state_moving_to_bucket holds, then arm_moving eventually holds.",ResponseRequirement_GLOBALLY
+65,"Globally, it is always the case that if state_moving_to_target holds, then ef_idle holds as well.",InvariantRequirement_GLOBALLY
+66,"Globally, it is always the case that if state_bucket_reached holds, then arm_idle and ef_idle holds as well.",InvariantRequirement_GLOBALLY
+67,"Globally, it is always the case that if state_releasing holds, then ef_force < 1 eventually holds and is succeeded by ef_size = 1.8 and ef_speed = 0 and ef_acc = 0 .",ResponseChain12Requirement_GLOBALLY
+68,"After alarm_button_pressed, state_alarm eventually holds.",ExistenceRequirement_AFTER
+69,"Globally, it is always the case that if state_alarm holds, then arm_idle and ef_idle holds as well.",InvariantRequirement_GLOBALLY
+70,"Globally, it is always the case that if joint1_torque > 10.0 or joint2_torque > 10.0 or  joint3_torque > 10.0 or  joint4_torque > 10.0 holds, then state_alarm eventually holds.",ResponseRequirement_GLOBALLY
+71,"Globally, it is always the case that if proximity_sensor < 20 holds, then arm_idle eventually holds.",ResponseRequirement_GLOBALLY
+72,"Globally, it is always the case that if proximity_sensor < 20 holds, then joint1_speed > -20 and joint1_speed < 20 holds as well.",InvariantRequirement_GLOBALLY
+73,"Globally, it is always the case that if proximity_sensor < 20 holds, then joint2_speed > -20 and joint2_speed < 20 holds as well.",InvariantRequirement_GLOBALLY
+74,"Globally, it is always the case that if proximity_sensor < 20 holds, then joint3_speed > -20 and joint3_speed < 20 holds as well.",InvariantRequirement_GLOBALLY
+75,"Globally, it is always the case that if proximity_sensor < 20 holds, then joint4_speed > -20 and joint4_speed < 20 holds as well.",InvariantRequirement_GLOBALLY
+,,
+,,
+F1,"Globally, it is always the case that if state_moving_to_target or state_moving_to_bucket holds, then joint1_speed > 100 eventually holds.",ResponseRequirement_GLOBALLY
+F2,"Globally, it is always the case that if state_init holds, then not arm_idle holds as well.",InvariantRequirement_GLOBALLY
+F3,"Globally, it is never the case that state_init holds.",AbsenceRequirement_GLOBALLY
+F4-1,"After joint1_torque > 10.0, it is never the case that state_alarm holds.",AbsenceRequirement_AFTER
+F4-2,"Globally, joint1_torque > 10.0 eventually holds.",ExistenceRequirement_GLOBALLY
+F5,"After state_init until state_grabbing, state_releasing eventually holds.",ExistenceRequirement_AFTER_UNTIL
+F6-1,"Globally, it is always the case that if arm_moving holds, then joint1_speed > 15.5 holds as well.",InvariantRequirement_GLOBALLY
+F6-2,"Globally, arm_moving and proximity_sensor = 10.0 eventually holds.",ExistenceRequirement_GLOBALLY
