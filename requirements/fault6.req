@@ -12,12 +12,12 @@
 
 ################################################################
 #
-# Fault injection 5
+# Fault injection 6
 # A requirement states that a joint speed is always above a threshold
 # regardless of the proximity sensor
 #
 ################################################################
-Globally, it is always the case that if arm_moving holds, then joint1_speed > 30.5 holds as well.
+Globally, it is always the case that if arm_moving holds, then joint1_speed > 15.5 holds as well.
 Globally, arm_moving and proximity_sensor = 10.0 eventually holds.
 
 # Global Requirements
@@ -121,7 +121,7 @@ Globally, it is always the case that if joint1_torque > 10.0 or joint2_torque > 
 
 # Proximity Sensor requirements
 Globally, it is always the case that if proximity_sensor < 20 holds, then arm_idle eventually holds.
-Globally, it is always the case that if proximity_sensor < 20 holds, then joint1_speed > -20 and joint1_speed < 20 holds as well.
-Globally, it is always the case that if proximity_sensor < 20 holds, then joint2_speed > -20 and joint2_speed < 20 holds as well.
-Globally, it is always the case that if proximity_sensor < 20 holds, then joint3_speed > -20 and joint3_speed < 20 holds as well.
-Globally, it is always the case that if proximity_sensor < 20 holds, then joint4_speed > -20 and joint4_speed < 20 holds as well.
+Globally, it is always the case that if proximity_sensor < 20 holds, then joint1_speed > -10 and joint1_speed < 10 holds as well.
+Globally, it is always the case that if proximity_sensor < 20 holds, then joint2_speed > -10 and joint2_speed < 10 holds as well.
+Globally, it is always the case that if proximity_sensor < 20 holds, then joint3_speed > -10 and joint3_speed < 10 holds as well.
+Globally, it is always the case that if proximity_sensor < 20 holds, then joint4_speed > -10 and joint4_speed < 10 holds as well.

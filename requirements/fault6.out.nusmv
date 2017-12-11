@@ -21,12 +21,12 @@ VAR
 	_equal_joint3_acc0 : boolean; -- joint3_acc = 10.0
 	_lower_ef_acc0 : boolean; -- ef_acc < 0.0
 	_equal_ef_acc0 : boolean; -- ef_acc = 0.0
-	_lower_joint4_speed2 : boolean; -- joint4_speed < -20.0
-	_equal_joint4_speed2 : boolean; -- joint4_speed = -20.0
+	_lower_joint4_speed2 : boolean; -- joint4_speed < -10.0
+	_equal_joint4_speed2 : boolean; -- joint4_speed = -10.0
 	_lower_joint4_speed1 : boolean; -- joint4_speed < 0.0
 	_equal_joint4_speed1 : boolean; -- joint4_speed = 0.0
-	_lower_joint4_speed3 : boolean; -- joint4_speed < 20.0
-	_equal_joint4_speed3 : boolean; -- joint4_speed = 20.0
+	_lower_joint4_speed3 : boolean; -- joint4_speed < 10.0
+	_equal_joint4_speed3 : boolean; -- joint4_speed = 10.0
 	_lower_joint4_speed0 : boolean; -- joint4_speed < 90.0
 	_equal_joint4_speed0 : boolean; -- joint4_speed = 90.0
 	_lower_proximity_sensor1 : boolean; -- proximity_sensor < 0.0
@@ -59,14 +59,14 @@ VAR
 	_equal_ef_force1 : boolean; -- ef_force = 1.0
 	_lower_ef_force0 : boolean; -- ef_force < 2.5
 	_equal_ef_force0 : boolean; -- ef_force = 2.5
-	_lower_joint1_speed3 : boolean; -- joint1_speed < -20.0
-	_equal_joint1_speed3 : boolean; -- joint1_speed = -20.0
+	_lower_joint1_speed3 : boolean; -- joint1_speed < -10.0
+	_equal_joint1_speed3 : boolean; -- joint1_speed = -10.0
 	_lower_joint1_speed2 : boolean; -- joint1_speed < 0.0
 	_equal_joint1_speed2 : boolean; -- joint1_speed = 0.0
-	_lower_joint1_speed4 : boolean; -- joint1_speed < 20.0
-	_equal_joint1_speed4 : boolean; -- joint1_speed = 20.0
-	_lower_joint1_speed0 : boolean; -- joint1_speed < 30.5
-	_equal_joint1_speed0 : boolean; -- joint1_speed = 30.5
+	_lower_joint1_speed4 : boolean; -- joint1_speed < 10.0
+	_equal_joint1_speed4 : boolean; -- joint1_speed = 10.0
+	_lower_joint1_speed0 : boolean; -- joint1_speed < 15.5
+	_equal_joint1_speed0 : boolean; -- joint1_speed = 15.5
 	_lower_joint1_speed1 : boolean; -- joint1_speed < 90.0
 	_equal_joint1_speed1 : boolean; -- joint1_speed = 90.0
 	_lower_joint3_angle0 : boolean; -- joint3_angle < -130.0
@@ -77,12 +77,12 @@ VAR
 	_equal_joint3_angle1 : boolean; -- joint3_angle = 130.0
 	_lower_joint1_torque0 : boolean; -- joint1_torque < 10.0
 	_equal_joint1_torque0 : boolean; -- joint1_torque = 10.0
-	_lower_joint2_speed2 : boolean; -- joint2_speed < -20.0
-	_equal_joint2_speed2 : boolean; -- joint2_speed = -20.0
+	_lower_joint2_speed2 : boolean; -- joint2_speed < -10.0
+	_equal_joint2_speed2 : boolean; -- joint2_speed = -10.0
 	_lower_joint2_speed1 : boolean; -- joint2_speed < 0.0
 	_equal_joint2_speed1 : boolean; -- joint2_speed = 0.0
-	_lower_joint2_speed3 : boolean; -- joint2_speed < 20.0
-	_equal_joint2_speed3 : boolean; -- joint2_speed = 20.0
+	_lower_joint2_speed3 : boolean; -- joint2_speed < 10.0
+	_equal_joint2_speed3 : boolean; -- joint2_speed = 10.0
 	_lower_joint2_speed0 : boolean; -- joint2_speed < 90.0
 	_equal_joint2_speed0 : boolean; -- joint2_speed = 90.0
 	_lower_joint4_acc1 : boolean; -- joint4_acc < 0.0
@@ -103,12 +103,12 @@ VAR
 	_equal_joint2_angle2 : boolean; -- joint2_angle = 0.0
 	_lower_joint2_angle1 : boolean; -- joint2_angle < 130.0
 	_equal_joint2_angle1 : boolean; -- joint2_angle = 130.0
-	_lower_joint3_speed2 : boolean; -- joint3_speed < -20.0
-	_equal_joint3_speed2 : boolean; -- joint3_speed = -20.0
+	_lower_joint3_speed2 : boolean; -- joint3_speed < -10.0
+	_equal_joint3_speed2 : boolean; -- joint3_speed = -10.0
 	_lower_joint3_speed1 : boolean; -- joint3_speed < 0.0
 	_equal_joint3_speed1 : boolean; -- joint3_speed = 0.0
-	_lower_joint3_speed3 : boolean; -- joint3_speed < 20.0
-	_equal_joint3_speed3 : boolean; -- joint3_speed = 20.0
+	_lower_joint3_speed3 : boolean; -- joint3_speed < 10.0
+	_equal_joint3_speed3 : boolean; -- joint3_speed = 10.0
 	_lower_joint3_speed0 : boolean; -- joint3_speed < 90.0
 	_equal_joint3_speed0 : boolean; -- joint3_speed = 90.0
 	_lower_ef_speed0 : boolean; -- ef_speed < 0.0
